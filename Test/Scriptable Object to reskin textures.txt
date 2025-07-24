@@ -1,0 +1,5 @@
+Bước 1: Thay asset trong data ItemReskinData
+Bước 2: Kéo các Sprite từ folder Textures/Fish vào ItemReskinData
+Bước 3: Trong Scene Game có gameobject ItemReskinApplier, bấm dấu 3 chấm ở góc (context menu) bên script ItemReskinApplier
+Chọn Apply Reskin
+→ Các prefab trong Assets/Prefabs sẽ được đổi sprite và scale đúng tỉ lệ
