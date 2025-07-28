@@ -21,7 +21,7 @@ public class Item
             GameObject prefab = Resources.Load<GameObject>(prefabname);
             if (prefab)
             {
-                View = GameObject.Instantiate(prefab).transform;
+                View = SimplePool.Spawn(prefab).transform;
             }
         }
     }
@@ -101,7 +101,8 @@ public class Item
             View.DOScale(0.1f, 0.1f).OnComplete(
                 () =>
                 {
-                    GameObject.Destroy(View.gameObject);
+                    SimplePool.Despawn(View.gameObject);
+                    View.localScale = Vector3.one;
                     View = null;
                 }
                 );
@@ -132,7 +133,7 @@ public class Item
 
         if (View)
         {
-            GameObject.Destroy(View.gameObject);
+            SimplePool.Despawn(View.gameObject);
             View = null;
         }
     }

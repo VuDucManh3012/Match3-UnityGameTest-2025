@@ -47,7 +47,7 @@ public class Board
         {
             for (int y = 0; y < boardSizeY; y++)
             {
-                GameObject go = GameObject.Instantiate(prefabBG);
+                GameObject go = SimplePool.Spawn(prefabBG);
                 go.transform.position = origin + new Vector3(x, y, 0f);
                 go.transform.SetParent(m_root);
 
@@ -669,7 +669,7 @@ public class Board
                 Cell cell = m_cells[x, y];
                 cell.Clear();
 
-                GameObject.Destroy(cell.gameObject);
+                SimplePool.Despawn(cell.gameObject);
                 m_cells[x, y] = null;
             }
         }

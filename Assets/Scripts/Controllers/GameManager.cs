@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_boardController != null) m_boardController.Update();
+        if (m_boardController != null) m_boardController.OnUpdate();
     }
 
 
@@ -83,6 +83,11 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevel(eLevelMode mode)
     {
+        if (m_boardController)
+        {
+            SimplePool.Despawn(m_boardController.gameObject);
+            m_boardController = null;
+        }
         m_boardController = new GameObject("BoardController").AddComponent<BoardController>();
         m_boardController.StartGame(this, m_gameSettings);
 
