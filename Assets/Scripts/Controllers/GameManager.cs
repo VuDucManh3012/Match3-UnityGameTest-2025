@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public event Action<eStateGame> StateChangedAction = delegate { };
 
+    public int seedRandomLevel = 0;
+    public eLevelMode modeCurent;
+
     public enum eLevelMode
     {
         TIMER,
@@ -88,6 +91,9 @@ public class GameManager : MonoBehaviour
             SimplePool.Despawn(m_boardController.gameObject);
             m_boardController = null;
         }
+
+        modeCurent = mode;
+        UnityEngine.Random.InitState(seedRandomLevel);
         m_boardController = new GameObject("BoardController").AddComponent<BoardController>();
         m_boardController.StartGame(this, m_gameSettings);
 

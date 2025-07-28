@@ -106,12 +106,19 @@ public class UIMainManager : MonoBehaviour
 
     internal void LoadLevelMoves()
     {
+        m_gameManager.seedRandomLevel = UnityEngine.Random.Range(0, 999999);
         m_gameManager.LoadLevel(GameManager.eLevelMode.MOVES);
     }
 
     internal void LoadLevelTimer()
     {
+        m_gameManager.seedRandomLevel = UnityEngine.Random.Range(0, 999999);
         m_gameManager.LoadLevel(GameManager.eLevelMode.TIMER);
+    }
+
+    internal void OnClickRestart()
+    {
+        m_gameManager.LoadLevel(m_gameManager.modeCurent);
     }
 
     internal void ShowGameMenu()
