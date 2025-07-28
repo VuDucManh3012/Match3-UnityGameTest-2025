@@ -147,7 +147,45 @@ public class Board
 
                 NormalItem item = new NormalItem();
 
-                item.SetType(Utils.GetRandomNormalType());
+                List<NormalItem.eNormalType> types = new List<NormalItem.eNormalType>();
+
+                if (cell.NeighbourUp != null)
+                {
+                    NormalItem nitem = cell.NeighbourUp.Item as NormalItem;
+                    if (nitem != null)
+                    {
+                        types.Add(nitem.ItemType);
+                    }
+                }
+
+                if (cell.NeighbourBottom != null)
+                {
+                    NormalItem nitem = cell.NeighbourBottom.Item as NormalItem;
+                    if (nitem != null)
+                    {
+                        types.Add(nitem.ItemType);
+                    }
+                }
+
+                if (cell.NeighbourRight != null)
+                {
+                    NormalItem nitem = cell.NeighbourRight.Item as NormalItem;
+                    if (nitem != null)
+                    {
+                        types.Add(nitem.ItemType);
+                    }
+                }
+
+                if (cell.NeighbourLeft != null)
+                {
+                    NormalItem nitem = cell.NeighbourLeft.Item as NormalItem;
+                    if (nitem != null)
+                    {
+                        types.Add(nitem.ItemType);
+                    }
+                }
+
+                item.SetType(Utils.GetRandomNormalTypeExceptPriority(types.ToArray(), GetNormalTypeInLevel()));
                 item.SetView();
                 item.SetViewRoot(m_root);
 
@@ -155,6 +193,23 @@ public class Board
                 cell.ApplyItemPosition(true);
             }
         }
+    }
+    List<NormalItem.eNormalType> GetNormalTypeInLevel()
+    {
+        List<NormalItem.eNormalType> list = new List<NormalItem.eNormalType>();
+        for (int x = 0; x < boardSizeX; x++)
+        {
+            for (int y = 0; y < boardSizeY; y++)
+            {
+                Cell cell = m_cells[x, y];
+                if (cell.Item is NormalItem)
+                {
+                    NormalItem item = cell.Item as NormalItem;
+                    list.Add(item.ItemType);
+                }
+            }
+        }
+        return list;
     }
 
     internal void ExplodeAllItems()
